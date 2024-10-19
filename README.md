@@ -28,7 +28,7 @@ Place the project directory in the htdocs folder of XAMPP.
 Start the Apache and MySQL modules.
 Access the application:
 
-Open your browser and navigate to http://localhost/employee-management-system/.
+Open your browser and navigate to http://http://localhost/Advanced_project_Employee_Management_System/
 Usage
 Admin:
 Create new employees, manage leaves, view attendance, and generate reports.
