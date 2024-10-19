@@ -1,0 +1,54 @@
+<?php
+session_start();
+if ($_SESSION['role'] != 'admin') {
+    header('Location: login.php');
+    exit();
+}
+
+include 'config.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $department = $_POST['department'];
+
+    $stmt = $conn->prepare("INSERT INTO employees (name, email, phone, department) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param('ssss', $name, $email, $phone, $department);
+    $stmt->execute();
+    header('Location: admin_dashboard.php');
+}
+?>
+
+<!-- Add Employee Form (Bootstrap) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Employee</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Add Employee</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>Phone</label>
+            <input type="text" name="phone" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>Department</label>
+            <input type="text" name="department" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Employee</button>
+    </form>
+</div>
+</body>
+</html>
